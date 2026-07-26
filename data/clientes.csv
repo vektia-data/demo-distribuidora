@@ -1,0 +1,81 @@
+﻿ClienteID;Cliente;Segmento;Localidad;Provincia;VendedorID;CondicionPago;FechaAlta;_PerfilPago
+1;Distribuidora Del Pueblo;Kiosco;Villa María;Córdoba;2;Cta Cte 15 días;2019-02-24;1
+2;Súper El Cruce;Supermercado;Bell Ville;Córdoba;1;Cta Cte 30 días;2018-05-03;0
+3;Almacén El Fortín;Almacén;Corral de Bustos;Córdoba;2;Cta Cte 30 días;2024-02-11;0
+4;Maxikiosco El Recreo;Autoservicio;Río Cuarto;Córdoba;1;Cta Cte 30 días;2019-10-16;1
+5;Despensa El Águila;Almacén;Marcos Juárez;Córdoba;3;Contado;2022-04-06;0
+6;Autoservicio Los Alamos;Supermercado;Corral de Bustos;Córdoba;1;Cta Cte 30 días;2023-02-25;0
+7;Almacén El Fortín;Mayorista;Villa Nueva;Córdoba;5;Cta Cte 30 días;2021-04-15;1
+8;Autoservicio La Victoria;Autoservicio;Venado Tuerto;Santa Fe;2;Cta Cte 30 días;2018-07-07;1
+9;Maxikiosco La Central;Kiosco;Bell Ville;Córdoba;1;Cta Cte 15 días;2023-02-01;1
+10;Autoservicio Los Hermanos;Almacén;Córdoba Capital;Córdoba;3;Cta Cte 30 días;2025-04-08;0
+11;Distribuidora La Central;Kiosco;Leones;Córdoba;2;Cta Cte 30 días;2021-01-10;2
+12;Despensa La Perla;Kiosco;Leones;Córdoba;3;Cta Cte 30 días;2018-08-18;0
+13;Kiosco Del Pueblo;Almacén;Córdoba Capital;Córdoba;1;Cta Cte 15 días;2024-05-12;2
+14;Kiosco Mi Barrio;Almacén;Arroyito;Córdoba;4;Contado;2019-07-26;0
+15;Distribuidora La Victoria;Autoservicio;Río Cuarto;Córdoba;4;Cta Cte 60 días;2022-06-24;0
+16;Súper Los Amigos;Mayorista;Marcos Juárez;Córdoba;5;Cta Cte 30 días;2019-01-08;1
+17;Distribuidora El Trébol;Supermercado;Marcos Juárez;Córdoba;4;Cta Cte 30 días;2024-09-08;0
+18;Súper Del Pueblo;Autoservicio;Las Varillas;Córdoba;5;Cta Cte 60 días;2018-02-17;1
+19;Súper El Águila;Almacén;Casilda;Santa Fe;3;Cta Cte 30 días;2021-10-25;0
+20;Almacén La Colonia;Autoservicio;Las Varillas;Córdoba;3;Cta Cte 60 días;2020-01-02;0
+21;Autoservicio La Terminal;Almacén;Arroyito;Córdoba;5;Cta Cte 30 días;2019-09-19;0
+22;Súper La Plaza;Almacén;Rafaela;Santa Fe;1;Cta Cte 30 días;2023-06-25;0
+23;Maxikiosco Los Alamos;Mayorista;Casilda;Santa Fe;5;Cta Cte 30 días;2021-06-13;0
+24;Almacén Don Pedro;Almacén;Corral de Bustos;Córdoba;4;Cta Cte 30 días;2023-12-22;1
+25;Súper El Trébol;Almacén;Las Varillas;Córdoba;3;Cta Cte 30 días;2024-10-20;0
+26;Maxikiosco La Colonia;Almacén;Leones;Córdoba;2;Cta Cte 30 días;2022-06-23;2
+27;Súper La Nueva;Kiosco;Las Varillas;Córdoba;1;Cta Cte 15 días;2018-09-20;0
+28;Súper La Central;Autoservicio;San Francisco;Córdoba;1;Contado;2025-01-28;0
+29;Maxikiosco El Amanecer;Almacén;Villa María;Córdoba;1;Cta Cte 30 días;2021-02-14;1
+30;Distribuidora La Plaza;Almacén;Marcos Juárez;Córdoba;5;Cta Cte 30 días;2020-09-22;1
+31;Almacén San Cayetano;Supermercado;San Francisco;Córdoba;4;Cta Cte 30 días;2021-12-22;0
+32;Almacén La Perla;Autoservicio;Oncativo;Córdoba;1;Contado;2021-10-21;1
+33;Despensa El Fortín;Almacén;San Francisco;Córdoba;4;Contado;2020-01-22;0
+34;Almacén La Nueva;Almacén;Casilda;Santa Fe;5;Contado;2025-04-25;2
+35;Maxikiosco El Recreo;Supermercado;Bell Ville;Córdoba;2;Cta Cte 30 días;2019-11-13;0
+36;Kiosco Santa Ana;Autoservicio;Venado Tuerto;Santa Fe;1;Contado;2018-01-09;2
+37;Maxikiosco La Nueva;Almacén;Rafaela;Santa Fe;3;Cta Cte 15 días;2024-03-26;1
+38;Autoservicio Los Hermanos;Autoservicio;San Francisco;Córdoba;1;Cta Cte 30 días;2024-01-30;0
+39;Súper Los Amigos;Almacén;Villa María;Córdoba;5;Cta Cte 60 días;2023-12-16;0
+40;Maxikiosco El Trébol;Mayorista;Bell Ville;Córdoba;5;Cta Cte 30 días;2018-10-08;1
+41;Kiosco San Cayetano;Kiosco;San Francisco;Córdoba;5;Cta Cte 15 días;2024-09-01;0
+42;Súper La Victoria;Almacén;Arroyito;Córdoba;5;Cta Cte 15 días;2020-12-04;0
+43;Autoservicio Mi Barrio;Kiosco;San Francisco;Córdoba;2;Cta Cte 30 días;2021-05-13;0
+44;Almacén El Progreso;Mayorista;Casilda;Santa Fe;5;Cta Cte 30 días;2023-02-21;1
+45;Almacén El Fortín;Autoservicio;Bell Ville;Córdoba;2;Cta Cte 30 días;2019-06-27;2
+46;Despensa La Estrella;Supermercado;Casilda;Santa Fe;3;Cta Cte 30 días;2019-10-09;0
+47;Súper Los Alamos;Autoservicio;Río Cuarto;Córdoba;5;Contado;2024-03-21;0
+48;Despensa Del Pueblo;Kiosco;Casilda;Santa Fe;1;Cta Cte 60 días;2024-03-16;0
+49;Distribuidora El Amanecer;Almacén;San Francisco;Córdoba;2;Cta Cte 30 días;2020-12-17;0
+50;Maxikiosco La Esquina;Almacén;Casilda;Santa Fe;1;Cta Cte 30 días;2021-02-07;0
+51;Distribuidora Del Pueblo;Almacén;Marcos Juárez;Córdoba;2;Cta Cte 30 días;2024-03-09;1
+52;Almacén Santa Ana;Autoservicio;Bell Ville;Córdoba;2;Cta Cte 30 días;2022-02-21;1
+53;Almacén Santa Rita;Almacén;Marcos Juárez;Córdoba;3;Cta Cte 60 días;2018-06-13;2
+54;Distribuidora San Cayetano;Almacén;San Francisco;Córdoba;3;Cta Cte 30 días;2022-07-23;2
+55;Despensa El Recreo;Kiosco;Casilda;Santa Fe;2;Cta Cte 60 días;2019-12-27;2
+56;Autoservicio Los Alamos;Almacén;Oncativo;Córdoba;4;Cta Cte 30 días;2020-10-13;0
+57;Kiosco El Recreo;Supermercado;Bell Ville;Córdoba;1;Cta Cte 30 días;2023-04-12;0
+58;Autoservicio Santa Rita;Supermercado;Las Varillas;Córdoba;2;Cta Cte 30 días;2020-07-02;0
+59;Autoservicio El Recreo;Almacén;Córdoba Capital;Córdoba;1;Cta Cte 60 días;2021-02-17;0
+60;Maxikiosco El Fortín;Autoservicio;Arroyito;Córdoba;3;Cta Cte 60 días;2019-04-18;2
+61;Autoservicio La Esquina;Almacén;Corral de Bustos;Córdoba;1;Cta Cte 30 días;2021-11-16;1
+62;Súper San Cayetano;Almacén;Corral de Bustos;Córdoba;4;Cta Cte 60 días;2020-02-18;0
+63;Súper La Plaza;Kiosco;Villa María;Córdoba;5;Cta Cte 30 días;2020-03-18;0
+64;Autoservicio Del Parque;Almacén;Arroyito;Córdoba;3;Cta Cte 30 días;2019-05-26;1
+65;Distribuidora El Cruce;Almacén;Río Cuarto;Córdoba;3;Cta Cte 15 días;2021-04-26;1
+66;Kiosco La Perla;Almacén;Arroyito;Córdoba;2;Cta Cte 30 días;2021-05-17;0
+67;Autoservicio Los Hermanos;Supermercado;Río Cuarto;Córdoba;4;Cta Cte 30 días;2024-07-03;1
+68;Kiosco La Perla;Almacén;Las Varillas;Córdoba;2;Cta Cte 30 días;2019-11-27;1
+69;Distribuidora Del Parque;Almacén;Arroyito;Córdoba;3;Contado;2020-08-20;1
+70;Despensa El Progreso;Almacén;San Francisco;Córdoba;1;Cta Cte 15 días;2023-05-01;1
+71;Kiosco Santa Ana;Kiosco;Las Varillas;Córdoba;5;Contado;2022-04-22;0
+72;Distribuidora El Progreso;Almacén;Arroyito;Córdoba;1;Cta Cte 30 días;2020-06-15;0
+73;Kiosco La Esquina;Mayorista;Leones;Córdoba;5;Cta Cte 30 días;2024-04-02;0
+74;Despensa Los Alamos;Supermercado;Las Varillas;Córdoba;4;Cta Cte 30 días;2023-12-16;2
+75;Kiosco Del Parque;Autoservicio;Rafaela;Santa Fe;5;Cta Cte 15 días;2024-02-23;0
+76;Kiosco La Nueva;Almacén;Venado Tuerto;Santa Fe;3;Cta Cte 30 días;2025-02-24;0
+77;Distribuidora La Central;Kiosco;Las Varillas;Córdoba;3;Cta Cte 15 días;2021-03-16;0
+78;Súper Don Pedro;Almacén;Casilda;Santa Fe;2;Contado;2022-04-18;1
+79;Kiosco El Cruce;Kiosco;Bell Ville;Córdoba;3;Cta Cte 30 días;2022-08-31;0
+80;Maxikiosco La Victoria;Supermercado;Villa Nueva;Córdoba;1;Cta Cte 30 días;2024-06-16;0
