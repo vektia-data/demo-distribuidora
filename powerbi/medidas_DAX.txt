@@ -1,0 +1,177 @@
+MEDIDAS DAX — DASHBOARD DEMO VEKTIA
+"Distribuidora del Centro S.A."
+=====================================================================
+Convención: crear una tabla vacía llamada "_Medidas" (Introducir datos,
+sin filas) y alojar ahí todas las medidas para mantener el modelo limpio.
+
+---------------------------------------------------------------------
+0. TABLA CALENDARIO (calculada — pestaña Modelado > Nueva tabla)
+---------------------------------------------------------------------
+Calendario =
+ADDCOLUMNS (
+    CALENDAR ( DATE ( 2024, 7, 1 ), DATE ( 2026, 6, 30 ) ),
+    "Año", YEAR ( [Date] ),
+    "MesNum", MONTH ( [Date] ),
+    "Mes", FORMAT ( [Date], "MMM YYYY" ),
+    "MesOrden", YEAR ( [Date] ) * 100 + MONTH ( [Date] ),
+    "Trimestre", "T" & FORMAT ( [Date], "Q YYYY" ),
+    "DiaSemana", FORMAT ( [Date], "ddd" )
+)
+-- Marcarla como tabla de fechas (columna [Date]).
+-- Ordenar [Mes] por [MesOrden].
+-- Relación: Calendario[Date] 1 —> * Ventas[Fecha]  (activa)
+--           Calendario[Date] 1 —> * Cobranzas[FechaPago] (activa)
+
+---------------------------------------------------------------------
+1. VENTAS Y RENTABILIDAD
+---------------------------------------------------------------------
+Ventas = SUMX ( Ventas, Ventas[Cantidad] * Ventas[PrecioUnitario] )
+
+Costo = SUMX ( Ventas, Ventas[Cantidad] * Ventas[CostoUnitario] )
+
+Margen = [Ventas] - [Costo]
+
+Margen % = DIVIDE ( [Margen], [Ventas] )
+
+Unidades = SUM ( Ventas[Cantidad] )
+
+Facturas = DISTINCTCOUNT ( Ventas[FacturaID] )
+
+Ticket Promedio = DIVIDE ( [Ventas], [Facturas] )
+
+Clientes Activos = DISTINCTCOUNT ( Ventas[ClienteID] )
+
+---------------------------------------------------------------------
+2. COMPARATIVAS TEMPORALES
+---------------------------------------------------------------------
+Ventas Año Anterior =
+CALCULATE ( [Ventas], SAMEPERIODLASTYEAR ( Calendario[Date] ) )
+
+Var % vs Año Anterior =
+DIVIDE ( [Ventas] - [Ventas Año Anterior], [Ventas Año Anterior] )
+
+Ventas Acumuladas (YTD) =
+TOTALYTD ( [Ventas], Calendario[Date] )
+
+Ventas Mes Anterior =
+CALCULATE ( [Ventas], DATEADD ( Calendario[Date], -1, MONTH ) )
+
+Var % vs Mes Anterior =
+DIVIDE ( [Ventas] - [Ventas Mes Anterior], [Ventas Mes Anterior] )
+
+---------------------------------------------------------------------
+3. CUENTAS POR COBRAR (el diferencial del demo)
+---------------------------------------------------------------------
+-- Nota: patrón de fecha de corte con REMOVEFILTERS para que el saldo
+-- se calcule "a la fecha" seleccionada en el filtro de Calendario,
+-- independiente del período visualizado.
+
+Facturado a la Fecha =
+VAR FechaCorte = MAX ( Calendario[Date] )
+RETURN
+CALCULATE (
+    SUMX ( Ventas, Ventas[Cantidad] * Ventas[PrecioUnitario] ),
+    REMOVEFILTERS ( Calendario ),
+    Ventas[Fecha] <= FechaCorte
+)
+
+Cobrado a la Fecha =
+VAR FechaCorte = MAX ( Calendario[Date] )
+RETURN
+CALCULATE (
+    SUM ( Cobranzas[Importe] ),
+    REMOVEFILTERS ( Calendario ),
+    Cobranzas[FechaPago] <= FechaCorte
+)
+
+Saldo por Cobrar = [Facturado a la Fecha] - [Cobrado a la Fecha]
+
+---------------------------------------------------------------------
+4. AGING DE DEUDA (antigüedad de saldos)
+---------------------------------------------------------------------
+-- Requiere columna calculada en Ventas con el total por línea:
+--   ImporteLinea = Ventas[Cantidad] * Ventas[PrecioUnitario]
+-- y una tabla auxiliar de facturas (Modelado > Nueva tabla):
+
+FacturasResumen =
+ADDCOLUMNS (
+    SUMMARIZE ( Ventas, Ventas[FacturaID], Ventas[ClienteID], Ventas[Fecha] ),
+    "TotalFactura",
+        CALCULATE ( SUM ( Ventas[ImporteLinea] ) ),
+    "Cobrado",
+        VAR fac = Ventas[FacturaID]
+        RETURN CALCULATE ( SUM ( Cobranzas[Importe] ), Cobranzas[FacturaID] = fac )
+)
+
+-- Medidas de aging sobre FacturasResumen (relacionar con Clientes por ClienteID):
+
+Saldo Vencido 0-30 =
+VAR FechaCorte = MAX ( Calendario[Date] )
+RETURN
+SUMX (
+    FILTER (
+        FacturasResumen,
+        VAR saldo = [TotalFactura] - COALESCE ( [Cobrado], 0 )
+        VAR dias = INT ( FechaCorte - FacturasResumen[Fecha] )
+        RETURN saldo > 0.5 && dias >= 0 && dias <= 30
+    ),
+    [TotalFactura] - COALESCE ( [Cobrado], 0 )
+)
+
+Saldo Vencido 31-60 =
+VAR FechaCorte = MAX ( Calendario[Date] )
+RETURN
+SUMX (
+    FILTER (
+        FacturasResumen,
+        VAR saldo = [TotalFactura] - COALESCE ( [Cobrado], 0 )
+        VAR dias = INT ( FechaCorte - FacturasResumen[Fecha] )
+        RETURN saldo > 0.5 && dias >= 31 && dias <= 60
+    ),
+    [TotalFactura] - COALESCE ( [Cobrado], 0 )
+)
+
+Saldo Vencido 61-90 =
+VAR FechaCorte = MAX ( Calendario[Date] )
+RETURN
+SUMX (
+    FILTER (
+        FacturasResumen,
+        VAR saldo = [TotalFactura] - COALESCE ( [Cobrado], 0 )
+        VAR dias = INT ( FechaCorte - FacturasResumen[Fecha] )
+        RETURN saldo > 0.5 && dias >= 61 && dias <= 90
+    ),
+    [TotalFactura] - COALESCE ( [Cobrado], 0 )
+)
+
+Saldo Vencido +90 =
+VAR FechaCorte = MAX ( Calendario[Date] )
+RETURN
+SUMX (
+    FILTER (
+        FacturasResumen,
+        VAR saldo = [TotalFactura] - COALESCE ( [Cobrado], 0 )
+        VAR dias = INT ( FechaCorte - FacturasResumen[Fecha] )
+        RETURN saldo > 0.5 && dias > 90
+    ),
+    [TotalFactura] - COALESCE ( [Cobrado], 0 )
+)
+
+-- Nota técnica: el umbral saldo > 0.5 evita ruido por redondeos de
+-- pagos parciales. En un cliente real esto se resolvería en la capa
+-- SQL — para el demo con CSV, la tabla calculada es suficiente y
+-- muestra dominio de DAX intermedio.
+
+---------------------------------------------------------------------
+5. INDICADORES DE COBRANZA
+---------------------------------------------------------------------
+% Cobrado = DIVIDE ( [Cobrado a la Fecha], [Facturado a la Fecha] )
+
+DSO (días promedio de cobro) =
+AVERAGEX (
+    FILTER ( FacturasResumen, NOT ISBLANK ( [Cobrado] ) ),
+    VAR pago =
+        CALCULATE ( MAX ( Cobranzas[FechaPago] ),
+                    Cobranzas[FacturaID] = FacturasResumen[FacturaID] )
+    RETURN INT ( pago - FacturasResumen[Fecha] )
+)

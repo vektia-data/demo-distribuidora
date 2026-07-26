@@ -1,0 +1,68 @@
+GUÍA DE ARMADO — DASHBOARD DEMO VEKTIA
+"Distribuidora del Centro S.A." (empresa ficticia, datos 100% sintéticos)
+=========================================================================
+
+CONTENIDO DEL PAQUETE
+  clientes.csv     80 clientes (segmento, localidad, vendedor, condición de pago)
+  productos.csv    47 artículos en 5 categorías, con costo y precio base
+  vendedores.csv   5 vendedores con zona
+  ventas.csv       ~40.000 líneas de factura, jul-2024 a jun-2026
+  cobranzas.csv    ~7.700 recibos, con demoras según perfil del cliente
+  medidas_DAX.txt  Modelo completo de medidas, documentado
+
+CARACTERÍSTICAS REALISTAS INCORPORADAS
+  - Estacionalidad: pico en diciembre (+35%), valle en enero-febrero
+  - Tendencia de crecimiento leve mes a mes
+  - Ajuste de precios mensual (~2% promedio, contexto inflacionario)
+  - Perfiles de pago: 55% puntuales, 30% demora leve, 15% morosos
+  - Pagos parciales (12% de las facturas se cobran en dos recibos)
+  - ~10% de la facturación pendiente de cobro a la fecha de corte
+  - Columnas técnicas prefijadas con "_" (ocultarlas en el modelo)
+
+PASO A PASO EN POWER BI DESKTOP
+  1. Obtener datos > Texto/CSV > importar los 5 archivos.
+     Delimitador: punto y coma. Codificación: UTF-8.
+     Verificar en Power Query que PrecioUnitario, CostoUnitario e
+     Importe queden como número decimal (config. regional Argentina:
+     coma decimal ya contemplada en los archivos).
+  2. Modelo de relaciones (esquema estrella):
+       Clientes[ClienteID]     1 —> * Ventas[ClienteID]
+       Clientes[ClienteID]     1 —> * Cobranzas[ClienteID]
+       Productos[ProductoID]   1 —> * Ventas[ProductoID]
+       Vendedores[VendedorID]  1 —> * Clientes[VendedorID]
+       Calendario[Date]        1 —> * Ventas[Fecha]
+       Calendario[Date]        1 —> * Cobranzas[FechaPago]
+  3. Crear la tabla Calendario y las medidas (medidas_DAX.txt, en orden).
+  4. Crear la columna ImporteLinea y la tabla FacturasResumen
+     (sección 4 del archivo DAX), relacionar FacturasResumen con
+     Clientes y ocultar las tablas base que no se usen en visuales.
+
+PÁGINAS SUGERIDAS DEL INFORME (3 páginas, no más)
+  Página 1 — VISIÓN GENERAL
+    Tarjetas: Ventas, Margen %, Facturas, Ticket Promedio
+    Línea: Ventas por mes con comparativa año anterior
+    Barras: Ventas por categoría | Torta o barras: por segmento de cliente
+    Mapa o barras: por localidad
+  Página 2 — VENTAS Y RENTABILIDAD
+    Matriz: categoría > producto con Ventas, Margen, Margen %
+    Barras: top 10 clientes | Ranking de vendedores
+    Dispersión: Ventas vs Margen % por producto (detecta los que venden
+    mucho y dejan poco — buen tema de conversación en la demo)
+  Página 3 — CUENTAS POR COBRAR  (la página que te diferencia)
+    Tarjetas: Saldo por Cobrar, % Cobrado, DSO
+    Barras apiladas: aging 0-30 / 31-60 / 61-90 / +90 por cliente
+    Tabla: detalle de facturas impagas con días de atraso
+    Filtro de fecha de corte (el saldo se recalcula a cualquier fecha —
+    ese efecto suele impresionar en las demos)
+
+CONSEJOS PARA LA DEMO EN VIVO
+  - Armá una historia: "así ve el dueño su negocio en 10 segundos"
+    (pág 1) -> "acá descubre qué producto no le conviene" (pág 2)
+    -> "y acá deja de perseguir cobranzas de memoria" (pág 3).
+  - Usá la paleta de Vektia: fondo claro, tinta #1B2240,
+    primario #3D5AFE, acento #00C4A7.
+  - Tema serio: sin efectos 3D, sin más de 2 tipografías.
+  - Sacá capturas en 1920x1080 de cada página: son el material de la
+    landing y de LinkedIn.
+
+Datos generados sintéticamente — no corresponden a ninguna empresa real.
