@@ -1,0 +1,12 @@
+# Power BI
+*.pbix.bak
+.tmp/
+
+# Python
+__pycache__/
+*.pyc
+
+# Sistema
+.DS_Store
+Thumbs.db
+.vscode/
